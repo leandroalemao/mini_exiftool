@@ -153,6 +153,7 @@ class MiniExiftool
     params << (@opts[:fast] ? '-fast ' : '')
     params << (@opts[:fast2] ? '-fast2 ' : '')
     params << generate_encoding_params
+    params << generate_orientation_params
     if run(cmd_gen(params, @filename))
       parse_output
     else
@@ -548,6 +549,10 @@ class MiniExiftool
     params
   end
 
+  def generate_orientation_params
+    '-Orientation=1 -n '
+  end
+
   # Hash with indifferent access:
   # DateTimeOriginal == datetimeoriginal == date_time_original
   class TagHash < Hash # :nodoc:
@@ -565,5 +570,4 @@ class MiniExiftool
       MiniExiftool.unify tag
     end
   end
-
 end
